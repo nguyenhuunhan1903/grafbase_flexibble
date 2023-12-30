@@ -1,5 +1,6 @@
-import {g, config } from '@grafbase/sdk'
+import { g, config, auth } from '@grafbase/sdk';
 
+// @ts-ignore
 const User = g.model('User', {
   name: g.string().length({ min: 2, max: 100 }),
   email: g.string().unique(),
@@ -10,6 +11,7 @@ const User = g.model('User', {
   projects: g.relation(() => Project).list().optional(),
 })
 
+// @ts-ignore
 const Project = g.model('Project', {
   title: g.string().length({ min: 3 }),
   description: g.string(), 
@@ -23,7 +25,7 @@ const Project = g.model('Project', {
 
 
 export default config({
-  graph: g,
+  schema: g,
   // Authentication - https://grafbase.com/docs/auth
   auth: {
     // OpenID Connect
